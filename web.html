@@ -1142,7 +1142,7 @@
                 <div class="crypto-instruction"><i class="fas fa-check-circle"></i> أكمل عملية الدفع باستخدام حساب PayPal الخاص بك</div>
                 <div class="crypto-instruction"><i class="fas fa-check-circle"></i> سيتم تفعيل المنتج تلقائياً بعد تأكيد الدفع</div>
                 
-                <a href="https://www.paypal.com/paypalme/atlastrade" target="_blank" class="verify-btn">
+                <a href="https://www.paypal.com/paypalme/medatemni" target="_blank" class="verify-btn">
                     <i class="fab fa-paypal"></i> الانتقال إلى PayPal
                 </a>
             </div>
