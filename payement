@@ -1,0 +1,166 @@
+<!-- داخل <footer> قبل قسم حقوق النشر، أضف هذا القسم الجديد -->
+<div class="payment-methods">
+    <h4>طرق الدفع المتاحة</h4>
+    <div class="payment-icons">
+        <!-- PayPal -->
+        <a href="https://paypal.com" target="_blank" class="payment-icon paypal" title="PayPal">
+            <i class="fab fa-paypal"></i>
+            <span>PayPal</span>
+        </a>
+        <!-- Bitcoin -->
+        <div class="payment-icon crypto" title="Bitcoin" onclick="copyCrypto('btc')">
+            <i class="fab fa-bitcoin"></i>
+            <span>Bitcoin</span>
+            <div class="crypto-address" id="btc-address">1PxVQwUutmSpf6yficDeYM1RCyeCW3tVPC</div>
+        </div>
+        <!-- USDT -->
+        <div class="payment-icon crypto" title="USDT (TRC20)" onclick="copyCrypto('usdt')">
+            <i class="fas fa-coins"></i>
+            <span>USDT</span>
+            <div class="crypto-address" id="usdt-address">TAThDq59eRyoZL544CEGo6c7yf9JKSoDkM</div>
+        </div>
+    </div>
+    <p class="payment-note">للاستفسارات حول الدفع: <a href="https://wa.me/212626995045" target="_blank"><i class="fab fa-whatsapp"></i> 0626995045</a> | <a href="https://t.me/atlasea" target="_blank"><i class="fab fa-telegram"></i> @atlasea</a></p>
+</div>
+
+<!-- ثم أضف هذه الأنماط CSS في <style> -->
+.payment-methods {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.payment-methods h4 {
+    color: var(--secondary);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-icon {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1.2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.payment-icon:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    border-color: var(--secondary);
+}
+
+.payment-icon.paypal {
+    background: linear-gradient(135deg, rgba(0, 48, 135, 0.2), rgba(0, 156, 222, 0.2));
+}
+
+.payment-icon.crypto {
+    background: linear-gradient(135deg, rgba(247, 147, 26, 0.2), rgba(255, 195, 0, 0.2));
+}
+
+.payment-icon i {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.payment-icon.paypal i { color: #003087; }
+.payment-icon.crypto i { color: #f7931a; }
+
+.payment-icon span {
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+}
+
+.crypto-address {
+    font-size: 0.7rem;
+    color: #aaa;
+    word-break: break-all;
+    margin-top: 0.5rem;
+    text-align: center;
+    display: none;
+}
+
+.payment-icon:hover .crypto-address {
+    display: block;
+}
+
+.payment-note {
+    text-align: center;
+    color: #ccc;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.payment-note a {
+    color: var(--secondary);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    font-weight: 600;
+}
+
+.payment-note a:hover {
+    text-decoration: underline;
+}
+
+/* للتجاوبية */
+@media (max-width: 768px) {
+    .payment-icons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .payment-icon {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+
+<!-- وأضف هذا الكود JavaScript في <script> -->
+// نسخ عناوين العملات المشفرة
+function copyCrypto(type) {
+    let address = '';
+    let currency = '';
+    
+    if (type === 'btc') {
+        address = '1PxVQwUutmSpf6yficDeYM1RCyeCW3tVPC';
+        currency = 'Bitcoin';
+    } else if (type === 'usdt') {
+        address = 'TAThDq59eRyoZL544CEGo6c7yf9JKSoDkM';
+        currency = 'USDT (TRC20)';
+    }
+    
+    navigator.clipboard.writeText(address).then(() => {
+        alert(`✓ تم نسخ عنوان ${currency}: ${address}`);
+    }).catch(err => {
+        prompt(`انسخ عنوان ${currency} يدوياً:`, address);
+    });
+}
+
+// فتح روابط التواصل
+document.querySelectorAll('.payment-note a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        if(this.getAttribute('href').includes('wa.me') || this.getAttribute('href').includes('t.me')) {
+            e.preventDefault();
+            window.open(this.getAttribute('href'), '_blank');
+        }
+    });
+});
