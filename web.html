@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -25,6 +26,12 @@
             background-color: #f5f7fa;
             color: var(--dark);
             line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
         /* شريط اللغات */
@@ -459,6 +466,301 @@
             font-size: 1.2rem;
         }
 
+        /* نافذة الدفع */
+        .payment-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .payment-modal.active {
+            display: flex;
+        }
+
+        .payment-content {
+            background: white;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2.5rem;
+            position: relative;
+            animation: modalSlide 0.3s ease;
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff4757;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: #ff3742;
+            transform: rotate(90deg);
+        }
+
+        .payment-modal h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .payment-modal .product-info {
+            background: var(--light);
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-right: 4px solid var(--accent);
+        }
+
+        .payment-modal .product-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .payment-modal .product-price {
+            color: var(--accent);
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+
+        .payment-options {
+            margin-top: 2rem;
+        }
+
+        .payment-option {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+            background: #e9ecef;
+        }
+
+        .payment-option.selected {
+            border-color: var(--secondary);
+            background: rgba(244, 180, 0, 0.1);
+        }
+
+        .payment-option i {
+            font-size: 1.8rem;
+            margin-left: 1rem;
+        }
+
+        .payment-option.paypal i { color: #003087; }
+        .payment-option.bitcoin i { color: #f7931a; }
+        .payment-option.usdt i { color: #26a17b; }
+
+        .payment-option span {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+        }
+
+        .payment-instructions {
+            background: #fff8e1;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
+            display: none;
+        }
+
+        .payment-instructions.active {
+            display: block;
+        }
+
+        .crypto-instruction {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .crypto-instruction i {
+            margin-left: 0.5rem;
+            color: var(--accent);
+        }
+
+        .crypto-address-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 0.8rem;
+            margin: 0.8rem 0;
+            font-family: monospace;
+            font-size: 0.9rem;
+            word-break: break-all;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copy-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: background 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #1a3a7a;
+        }
+
+        .verify-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            width: 100%;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .verify-btn:hover {
+            background: #009658;
+        }
+
+        /* قسم طرق الدفع في الفوتر */
+        .payment-methods {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-methods h4 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            text-align: center;
+        }
+
+        .payment-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .payment-icon {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .payment-icon:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+        }
+
+        .payment-icon.paypal {
+            background: linear-gradient(135deg, rgba(0, 48, 135, 0.2), rgba(0, 156, 222, 0.2));
+        }
+
+        .payment-icon.crypto {
+            background: linear-gradient(135deg, rgba(247, 147, 26, 0.2), rgba(255, 195, 0, 0.2));
+        }
+
+        .payment-icon i {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .payment-icon.paypal i { color: #003087; }
+        .payment-icon.crypto i { color: #f7931a; }
+
+        .payment-icon span {
+            font-weight: 600;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .crypto-address {
+            font-size: 0.7rem;
+            color: #aaa;
+            word-break: break-all;
+            margin-top: 0.5rem;
+            text-align: center;
+            display: none;
+        }
+
+        .payment-icon:hover .crypto-address {
+            display: block;
+        }
+
+        .payment-note {
+            text-align: center;
+            color: #ccc;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-note a {
+            color: var(--secondary);
+            text-decoration: none;
+            margin: 0 0.5rem;
+            font-weight: 600;
+        }
+
+        .payment-note a:hover {
+            text-decoration: underline;
+        }
+
         /* التذييل */
         footer {
             background: linear-gradient(to right, #1a1a2e, var(--dark));
@@ -536,6 +838,19 @@
                 gap: 2rem;
             }
             .logo { font-size: 1.8rem; }
+            .payment-icons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .payment-icon {
+                width: 100%;
+                max-width: 250px;
+            }
+            .payment-content {
+                padding: 1.5rem;
+                width: 95%;
+            }
         }
     </style>
 </head>
@@ -666,33 +981,33 @@
 
             <div class="services-grid">
                 <!-- كورس 1 -->
-                <div class="service-card">
+                <div class="service-card" data-product="روبوت التداول الذكي AI-Trader" data-price="499">
                     <div class="service-icon"><i class="fas fa-robot"></i></div>
                     <h3>روبوت التداول الذكي AI-Trader</h3>
                     <p>روبوت تداول آلي يستخدم خوارزميات الذكاء الاصطناعي للتعلم من تحركات السوق وتنفيذ الصفقات تلقائياً بنسبة دقة عالية.</p>
                     <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1642790553124-4c56d74c5a65?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="price">$499 <span>(رخصة سنوية)</span></div>
-                    <a href="#" class="service-button">شراء الروبوت</a>
+                    <a href="#" class="service-button buy-btn">شراء الروبوت</a>
                 </div>
 
                 <!-- كورس 2 -->
-                <div class="service-card">
+                <div class="service-card" data-product="حزمة المؤشرات المتقدمة" data-price="299">
                     <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
                     <h3>حزمة المؤشرات المتقدمة</h3>
                     <p>15 مؤشر فني ذكي مع إمكانية التنبؤ بحركة السعر، اكتشاف الفرص، وتحليل الاتجاهات بدقة غير مسبوقة.</p>
                     <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="price">$299 <span>(تحديثات مجانية لمدة عام)</span></div>
-                    <a href="#" class="service-button">شراء المؤشرات</a>
+                    <a href="#" class="service-button buy-btn">شراء المؤشرات</a>
                 </div>
 
                 <!-- كورس 3 -->
-                <div class="service-card">
+                <div class="service-card" data-product="أكاديمية التداول الاحترافي" data-price="349">
                     <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
                     <h3>أكاديمية التداول الاحترافي</h3>
                     <p>دورة متكاملة من البداية إلى الاحتراف: 45 ساعة فيديو، تدريبات عملية، ومتابعة شخصية مع مدربين محترفين.</p>
                     <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80');"></div>
                     <div class="price">$349 <span>(وصول دائم + تحديثات)</span></div>
-                    <a href="#" class="service-button">الاشتراك في الدورة</a>
+                    <a href="#" class="service-button buy-btn">الاشتراك في الدورة</a>
                 </div>
             </div>
         </div>
@@ -706,7 +1021,7 @@
 
             <div class="pricing-grid">
                 <!-- الباقة الأساسية -->
-                <div class="pricing-card">
+                <div class="pricing-card" data-product="الباقة الأساسية" data-price="79" data-type="شهري">
                     <h3>الباقة الأساسية</h3>
                     <div class="price">$79<span>/شهر</span></div>
                     <ul>
@@ -716,11 +1031,11 @@
                         <li><i class="fas fa-times"></i> <span>لا يشمل دعم فني مخصص</span></li>
                         <li><i class="fas fa-times"></i> <span>لا يشمل جلسات تدريبية</span></li>
                     </ul>
-                    <a href="#" class="service-button">اشترك الآن</a>
+                    <a href="#" class="service-button buy-btn">اشترك الآن</a>
                 </div>
 
                 <!-- الباقة المميزة (موصى بها) -->
-                <div class="pricing-card popular">
+                <div class="pricing-card popular" data-product="الباقة الاحترافية" data-price="149" data-type="شهري">
                     <div class="popular-tag">الأكثر طلباً</div>
                     <h3>الباقة الاحترافية</h3>
                     <div class="price">$149<span>/شهر</span></div>
@@ -731,11 +1046,11 @@
                         <li><i class="fas fa-check"></i> <span>دعم فني مخصص عبر الهاتف والبريد</span></li>
                         <li><i class="fas fa-check"></i> <span>جلسة تدريبية شهرية</span></li>
                     </ul>
-                    <a href="#" class="service-button" style="background: linear-gradient(to right, var(--secondary), #ffcc00); color: var(--primary);">اشترك الآن</a>
+                    <a href="#" class="service-button buy-btn" style="background: linear-gradient(to right, var(--secondary), #ffcc00); color: var(--primary);">اشترك الآن</a>
                 </div>
 
                 <!-- الباقة الاحترافية -->
-                <div class="pricing-card">
+                <div class="pricing-card" data-product="الباقة المؤسسية" data-price="299" data-type="شهري">
                     <h3>الباقة المؤسسية</h3>
                     <div class="price">$299<span>/شهر</span></div>
                     <ul>
@@ -745,11 +1060,95 @@
                         <li><i class="fas fa-check"></i> <span>دعم فني على مدار الساعة</span></li>
                         <li><i class="fas fa-check"></i> <span>تدريب أسبوعي + تحليل محفظة شخصي</span></li>
                     </ul>
-                    <a href="#" class="service-button">اشترك الآن</a>
+                    <a href="#" class="service-button buy-btn">اشترك الآن</a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- نافذة الدفع -->
+    <div class="payment-modal" id="paymentModal">
+        <div class="payment-content">
+            <div class="close-modal" onclick="closePaymentModal()">×</div>
+            <h3>إتمام عملية الشراء</h3>
+            
+            <div class="product-info">
+                <div class="product-name" id="modalProductName">روبوت التداول الذكي AI-Trader</div>
+                <div class="product-price" id="modalProductPrice">$499</div>
+                <div id="modalProductType"></div>
+            </div>
+
+            <div class="payment-options">
+                <div class="payment-option paypal" onclick="selectPayment('paypal')">
+                    <div>
+                        <i class="fab fa-paypal"></i>
+                        <span>الدفع عبر PayPal</span>
+                    </div>
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <div class="payment-option bitcoin" onclick="selectPayment('bitcoin')">
+                    <div>
+                        <i class="fab fa-bitcoin"></i>
+                        <span>الدفع بـ Bitcoin</span>
+                    </div>
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                
+                <div class="payment-option usdt" onclick="selectPayment('usdt')">
+                    <div>
+                        <i class="fas fa-coins"></i>
+                        <span>الدفع بـ USDT (TRC20)</span>
+                    </div>
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+            </div>
+
+            <!-- تعليمات البيتكوين -->
+            <div class="payment-instructions" id="bitcoinInstructions">
+                <h4>تعليمات الدفع بـ Bitcoin:</h4>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> قم بإرسال المبلغ بالضبط إلى العنوان التالي:</div>
+                <div class="crypto-address-box">
+                    <span id="btcAddressModal">1PxVQwUutmSpf6yficDeYM1RCyeCW3tVPC</span>
+                    <button class="copy-btn" onclick="copyAddress('btcAddressModal')">نسخ</button>
+                </div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> تأكد من دقة العنوان قبل الإرسال</div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> بعد الإرسال، أرسل إشعار الدفع عبر WhatsApp أو Telegram</div>
+                
+                <a href="https://wa.me/212626995045?text=لقد%20قمت%20بإرسال%20الدفع%20عبر%20Bitcoin%20للمنتج:%20" target="_blank" class="verify-btn" id="whatsappVerifyBTC">
+                    <i class="fab fa-whatsapp"></i> تأكيد الدفع عبر واتساب
+                </a>
+            </div>
+
+            <!-- تعليمات USDT -->
+            <div class="payment-instructions" id="usdtInstructions">
+                <h4>تعليمات الدفع بـ USDT:</h4>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> قم بإرسال المبلغ بالضبط إلى العنوان التالي (شبكة TRC20):</div>
+                <div class="crypto-address-box">
+                    <span id="usdtAddressModal">TAThDq59eRyoZL544CEGo6c7yf9JKSoDkM</span>
+                    <button class="copy-btn" onclick="copyAddress('usdtAddressModal')">نسخ</button>
+                </div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> تأكد من استخدام شبكة TRC20 فقط</div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> بعد الإرسال، أرسل إشعار الدفع عبر WhatsApp أو Telegram</div>
+                
+                <a href="https://wa.me/212626995045?text=لقد%20قمت%20بإرسال%20الدفع%20عبر%20USDT%20للمنتج:%20" target="_blank" class="verify-btn" id="whatsappVerifyUSDT">
+                    <i class="fab fa-whatsapp"></i> تأكيد الدفع عبر واتساب
+                </a>
+            </div>
+
+            <!-- تعليمات PayPal -->
+            <div class="payment-instructions" id="paypalInstructions">
+                <h4>تعليمات الدفع عبر PayPal:</h4>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> سيتم تحويلك إلى صفحة PayPal الآمنة</div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> أكمل عملية الدفع باستخدام حساب PayPal الخاص بك</div>
+                <div class="crypto-instruction"><i class="fas fa-check-circle"></i> سيتم تفعيل المنتج تلقائياً بعد تأكيد الدفع</div>
+                
+                <a href="https://www.paypal.com/paypalme/atlastrade" target="_blank" class="verify-btn">
+                    <i class="fab fa-paypal"></i> الانتقال إلى PayPal
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- التذييل -->
     <footer>
@@ -783,6 +1182,32 @@
                     <a href="#"><i class="fas fa-phone"></i> الدعم الهاتفي</a>
                 </div>
             </div>
+            
+            <!-- قسم طرق الدفع الجديد -->
+            <div class="payment-methods">
+                <h4>طرق الدفع المتاحة</h4>
+                <div class="payment-icons">
+                    <!-- PayPal -->
+                    <a href="https://paypal.com" target="_blank" class="payment-icon paypal" title="PayPal">
+                        <i class="fab fa-paypal"></i>
+                        <span>PayPal</span>
+                    </a>
+                    <!-- Bitcoin -->
+                    <div class="payment-icon crypto" title="Bitcoin" onclick="copyCrypto('btc')">
+                        <i class="fab fa-bitcoin"></i>
+                        <span>Bitcoin</span>
+                        <div class="crypto-address" id="btc-address">1PxVQwUutmSpf6yficDeYM1RCyeCW3tVPC</div>
+                    </div>
+                    <!-- USDT -->
+                    <div class="payment-icon crypto" title="USDT (TRC20)" onclick="copyCrypto('usdt')">
+                        <i class="fas fa-coins"></i>
+                        <span>USDT</span>
+                        <div class="crypto-address" id="usdt-address">TAThDq59eRyoZL544CEGo6c7yf9JKSoDkM</div>
+                    </div>
+                </div>
+                <p class="payment-note">للاستفسارات حول الدفع: <a href="https://wa.me/212626995045" target="_blank"><i class="fab fa-whatsapp"></i> 0626995045</a> | <a href="https://t.me/atlasea" target="_blank"><i class="fab fa-telegram"></i> @atlasea</a></p>
+            </div>
+            
             <div class="copyright">
                 <p>© 2023 Atlas Trade. جميع الحقوق محفوظة. التداول في الأسواق المالية ينطوي على مخاطر قد تؤدي إلى خسارة رأس المال.</p>
                 <p><strong>إخلاء المسؤولية:</strong> منتجاتنا وخدماتنا لأغراض تعليمية وإعلامية فقط. الأداء السابق لا يضمن النتائج المستقبلية. يجب أن تستند قرارات التداول إلى بحثك الشخصي.</p>
@@ -820,14 +1245,6 @@
             });
         });
 
-        // رسالة عند النقر على زر الشراء
-        document.querySelectorAll('.service-button, .pricing-card .service-button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                alert('🚀 مرحباً بك في Atlas Trade! هذه نسخة تجريبية من الموقع. في النسخة النهائية، سيتم توجيهك إلى صفحة الدفع الآمنة لإكمال عملية الشراء.');
-            });
-        });
-
         // تحريك الصور العائمة
         document.addEventListener('mousemove', function(e) {
             const floatingImages = document.querySelectorAll('.floating-img');
@@ -841,6 +1258,129 @@
                 
                 img.style.transform = `translate(${x}px, ${y}px)`;
             });
+        });
+
+        // نسخ عناوين العملات المشفرة
+        function copyCrypto(type) {
+            let address = '';
+            let currency = '';
+            
+            if (type === 'btc') {
+                address = '1PxVQwUutmSpf6yficDeYM1RCyeCW3tVPC';
+                currency = 'Bitcoin';
+            } else if (type === 'usdt') {
+                address = 'TAThDq59eRyoZL544CEGo6c7yf9JKSoDkM';
+                currency = 'USDT (TRC20)';
+            }
+            
+            navigator.clipboard.writeText(address).then(() => {
+                alert(`✓ تم نسخ عنوان ${currency}: ${address}`);
+            }).catch(err => {
+                prompt(`انسخ عنوان ${currency} يدوياً:`, address);
+            });
+        }
+
+        // متغيرات الدفع
+        let currentProduct = '';
+        let currentPrice = '';
+        let currentProductType = '';
+        let selectedPaymentMethod = '';
+
+        // فتح نافذة الدفع
+        document.querySelectorAll('.buy-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // الحصول على بيانات المنتج
+                const card = this.closest('.service-card, .pricing-card');
+                currentProduct = card.getAttribute('data-product');
+                currentPrice = card.getAttribute('data-price');
+                currentProductType = card.getAttribute('data-type') || 'للمرة الواحدة';
+                
+                // تحديث محتوى النافذة
+                document.getElementById('modalProductName').textContent = currentProduct;
+                document.getElementById('modalProductPrice').textContent = '$' + currentPrice;
+                document.getElementById('modalProductType').textContent = currentProductType;
+                
+                // تحديث روابط واتساب
+                const whatsappMessage = encodeURIComponent(`لقد قمت بطلب المنتج: ${currentProduct} - السعر: $${currentPrice} - ${currentProductType}`);
+                document.getElementById('whatsappVerifyBTC').href = `https://wa.me/212626995045?text=${whatsappMessage}%20(دفع%20Bitcoin)`;
+                document.getElementById('whatsappVerifyUSDT').href = `https://wa.me/212626995045?text=${whatsappMessage}%20(دفع%20USDT)`;
+                
+                // إظهار نافذة الدفع
+                document.getElementById('paymentModal').classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // إخفاء جميع التعليمات
+                document.querySelectorAll('.payment-instructions').forEach(el => {
+                    el.classList.remove('active');
+                });
+                
+                // إزالة التحديد من جميع خيارات الدفع
+                document.querySelectorAll('.payment-option').forEach(el => {
+                    el.classList.remove('selected');
+                });
+                
+                selectedPaymentMethod = '';
+            });
+        });
+
+        // إغلاق نافذة الدفع
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            selectedPaymentMethod = '';
+        }
+
+        // اختيار طريقة الدفع
+        function selectPayment(method) {
+            // إزالة التحديد من جميع الخيارات
+            document.querySelectorAll('.payment-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // إضافة التحديد للخيار المختار
+            event.currentTarget.classList.add('selected');
+            selectedPaymentMethod = method;
+            
+            // إخفاء جميع التعليمات
+            document.querySelectorAll('.payment-instructions').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // إظهار التعليمات المناسبة
+            if (method === 'bitcoin') {
+                document.getElementById('bitcoinInstructions').classList.add('active');
+            } else if (method === 'usdt') {
+                document.getElementById('usdtInstructions').classList.add('active');
+            } else if (method === 'paypal') {
+                document.getElementById('paypalInstructions').classList.add('active');
+            }
+        }
+
+        // نسخ العنوان في النافذة
+        function copyAddress(elementId) {
+            const address = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(address).then(() => {
+                alert('✓ تم نسخ العنوان: ' + address);
+            }).catch(err => {
+                prompt('انسخ العنوان يدوياً:', address);
+            });
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        document.getElementById('paymentModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePaymentModal();
+            }
+        });
+
+        // إغلاق النافذة بالزر Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && document.getElementById('paymentModal').classList.contains('active')) {
+                closePaymentModal();
+            }
         });
     </script>
 </body>
